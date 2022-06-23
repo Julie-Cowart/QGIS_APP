@@ -17,8 +17,7 @@ def get_salt(request, lat='', lon=''):
         """-75.52698,39.10226"""
         """QUERY FROM DATABASE"""
         with connection.cursor() as cursor:
-            raw_query = f"SELECT ST_Value(rast, ST_SetSRID(ST_MakePoint({latitude},{longitude}),4326)) AS 
-            val FROM Kent_2017 WHERE ST_Intersects(rast, ST_SetSRID(ST_MakePoint({latitude},{longitude}),4326));"
+            raw_query = f"SELECT ST_Value(rast, ST_SetSRID(ST_MakePoint({latitude},{longitude}),4326)) AS val FROM Kent_2017 WHERE ST_Intersects(rast, ST_SetSRID(ST_MakePoint({latitude},{longitude}),4326));"
             # print(raw_query)
             cursor.execute(raw_query)
             for val in cursor.fetchall():
@@ -26,8 +25,7 @@ def get_salt(request, lat='', lon=''):
                 break
         print(salt_val_17)
         with connection.cursor() as cursor:
-            raw_query = f"SELECT ST_Value(rast, ST_SetSRID(ST_MakePoint({latitude},{longitude}),4326)) AS 
-            val FROM Kent_2013 WHERE ST_Intersects(rast, ST_SetSRID(ST_MakePoint({latitude},{longitude}),4326));"
+            raw_query = f"SELECT ST_Value(rast, ST_SetSRID(ST_MakePoint({latitude},{longitude}),4326)) AS val FROM Kent_2013 WHERE ST_Intersects(rast, ST_SetSRID(ST_MakePoint({latitude},{longitude}),4326));"
             # print(raw_query)
             cursor.execute(raw_query)
             for val in cursor.fetchall():
