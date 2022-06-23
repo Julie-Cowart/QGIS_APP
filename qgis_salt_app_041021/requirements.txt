@@ -26,7 +26,8 @@ MarkupSafe==2.0.1
 numpy==1.21.1
 Pillow==8.3.1
 prompt-toolkit==3.0.19
-psycopg2==2.8.6
+#psycopg2==2.8.6
+psycopg2-binary==2.8.6
 pyparsing==2.4.7
 python-dateutil==2.8.2
 pytz==2021.1
