@@ -9,8 +9,10 @@ base_osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-kent_17 = L.imageOverlay("https://stpubsecdev.blob.core.windows.net/webappassets/qgis/Kent2017.png", [[38.450723828315, -75.789989154039], [39.839519282115, -75.048879031539]]).addTo(map);
-kent_13 = L.imageOverlay("https://stpubsecdev.blob.core.windows.net/webappassets/qgis/Kent2013.png", [[38.450723828315, -75.789989154039], [39.839519282115, -75.048879031539]]).addTo(map);
+kent_17 = L.imageOverlay(static_url + "Kent2017.png", [[38.450723828315, -75.789989154039], 
+[39.839519282115, -75.048879031539]]).addTo(map);
+kent_13 = L.imageOverlay(static_url + "Kent2013.png", [[38.450723828315, -75.789989154039], 
+[39.839519282115, -75.048879031539]]).addTo(map);
 
 var baseMaps = {
   "OSM": base_osm
@@ -90,7 +92,7 @@ function showPosition(position) {
     lat = latlng.lat.toFixed(4);
     map.flyTo(latlng);
     pop_up.setLatLng(latlng);
-    query_url = query_url.concat('https://rasterfile.azurewebsites.net/maps/rast_val/', lat.replace(".", "x"),'/',lon.replace(".", "x"),'/')
+    query_url = query_url.concat(static_url, '../maps/rast_val/', lat.replace(".", "x"),'/',lon.replace(".", "x"),'/')
     sendHttpRequest('GET', query_url).then(responseData => {
       pop_up.setContent(set_popup_content(responseData))
           .openOn(map);
@@ -99,11 +101,12 @@ function showPosition(position) {
 
 
 const getData = (e) => {
-        var query_url = '';
+        var query_url = 
+static_url;
         var value = 0;
         lon = e.latlng.lng.toFixed(4);
         lat = e.latlng.lat.toFixed(4);
-        query_url = query_url.concat('https://rasterfile.azurewebsites.net/maps/rast_val/', lat.replace(".", "x"),'/',lon.replace(".", "x"),'/')
+        query_url = query_url.concat('../maps/rast_val/', lat.replace(".", "x"),'/',lon.replace(".", "x"),'/')
         console.log(query_url);
         sendHttpRequest('GET', query_url).then(responseData => {
         pop_up.setContent(set_popup_content(responseData))
